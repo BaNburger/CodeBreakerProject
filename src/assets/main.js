@@ -48,7 +48,7 @@ function validateInput(input) {
   if (input.length == 4) {
     return true;
   } else {
-    setMessage("guesses must be exactly 4 characters long.");
+    setMessage("Guesses must be exactly 4 characters long.");
     return false;
   }
 }
@@ -58,7 +58,6 @@ function getResults(input) {
   for (i=0; i<input.length; i++) {
     if (input.charAt(i) === answer.value.charAt(i)) {
       htmlResult += '<span class="glyphicon glyphicon-ok"></span>';
-      isCorrect += 1;
     } else if (answer.value.indexOf(input.charAt(i)) > -1) {
       htmlResult += '<span class="glyphicon glyphicon-transfer"></span>';
     } else {
