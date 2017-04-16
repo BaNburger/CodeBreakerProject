@@ -20,5 +20,5 @@ function setHiddenFields() {
 }
 
 function setMessage(label) {
-  let message.innerHTML = label;
+  document.getElementById("message").innerHTML = label;
 }
