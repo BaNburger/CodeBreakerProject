@@ -9,5 +9,8 @@ function guess() {
 //implement new functions here
 
 function setHiddenFields() {
-  answer.value = Math.floor(Math.random()*10000);
+  answer.value = Math.floor(Math.random()*10000).toString();
+  while (answer.length < 4) {
+    answer.value = "0" + answer.value;
+  }
 }
