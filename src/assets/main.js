@@ -14,17 +14,26 @@ function guess() {
       return false;
     }
 
-    if (getResults(answer.value)) {
+    if (getResults(input.value)) {
+      //winning condition
       setMessage("You Win! :)");
-    } else if (attempt.value > 9) {
+      showAnswer(true);
+      showReplay();
+    } else if (input.value > 9) {
+      //loosing condition
       setMessage("You Lose! :(");
+      showAnswer(false);
+      showReplay();
+    } else {
+      //continue condition
+      setMessage("Incorrect, try again.");
     }
 }
 
 //implement new functions here
 
 function setHiddenFields() {
-  let attempt.value = 0;
+  attempt.value = 0;
   answer.value = Math.floor(Math.random()*10000).toString();
   while (answer.value.length < 4) {
     answer.value = "0" + answer.value;
@@ -45,7 +54,6 @@ function validateInput(input) {
 }
 
 function getResults(input) {
-  let isCorrect = 0;
   let htmlResult = '<div class="row"><span class="col-md-6">' + input + '</span><div class="col-md-6">';
   for (i=0; i<input.length; i++) {
     if (input.charAt(i) === answer.value.charAt(i)) {
@@ -56,11 +64,27 @@ function getResults(input) {
     } else {
       htmlResult += '<span class="glyphicon glyphicon-remove"></span>';
     }
+    htmlResult += "</div></div>";
+    document.getElementById("results").innerHTML = htmlResult;
   }
-
-  if (isCorrect === 4) {
+  if (input === answer.value) {
     return true;
   } else {
     return false;
   }
+}
+
+function showAnswer(input) {
+  let code = document.getElementById("code");
+  code.innerHTML = answer.value;
+  if (input === true) {
+    code.className += " success";
+  } else if (input === false) {
+    code.className += " failure";
+  }
+}
+
+function showReplay() {
+  document.getElementById("guessing-div").style.display = " none";
+  document.getElementById("replay-div").style.display = " block";
 }
